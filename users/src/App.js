@@ -6,9 +6,13 @@ import { UserList } from "./components/UserList";
 function App() {
   const [users, setUsers] = useState([]);
 
+  const onUserAdd = (user) => {
+    setUsers([...users, user]);
+  };
+
   return (
     <div className="App">
-      <UserForm setState={setUsers} />
+      <UserForm users={users} onUserAdd={onUserAdd} />
       <UserList users={users} />
     </div>
   );

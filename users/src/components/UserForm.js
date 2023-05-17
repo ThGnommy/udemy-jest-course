@@ -1,8 +1,6 @@
-import { useId, useRef } from "react";
+import { useRef } from "react";
 
-export const UserForm = ({ setState }) => {
-  const id = useId();
-
+export const UserForm = ({ users, onUserAdd }) => {
   const nameRef = useRef();
   const emailRef = useRef();
 
@@ -12,9 +10,9 @@ export const UserForm = ({ setState }) => {
     const name = nameRef.current.value;
     const email = emailRef.current.value;
 
-    const newUser = { id, name, email };
+    const newUser = { name, email };
 
-    setState((prev) => [newUser, ...prev]);
+    onUserAdd(newUser);
 
     // reset fields
     nameRef.current.value = "";
