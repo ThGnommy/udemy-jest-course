@@ -1,9 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { UserList } from "./components/UserList";
 
-test("render one row per user", () => {
-  // render the component
-
+function renderComponent() {
   const users = [
     {
       name: "jane",
@@ -15,7 +13,14 @@ test("render one row per user", () => {
     },
   ];
 
-  const { container } = render(<UserList users={users} />);
+  render(<UserList users={users} />);
+
+  return { users };
+}
+
+test("render one row per user", async () => {
+  // render the component
+  renderComponent();
 
   // find all the rows in the table
   // # Approach 1
@@ -25,8 +30,23 @@ test("render one row per user", () => {
   // # Approach 2
   // eslint-disable-next-line
   // const rows = container.querySelectorAll("tbody tr");
-
   expect(rows).toHaveLength(2);
 });
 
-// test("render the email and name of each user", () => {});
+// ⬇️ this will run before the tests
+beforeEach(() => {});
+
+test("render the email and name of each user", () => {
+  // render the component
+  const { users } = renderComponent();
+
+  for (let user of users) {
+    const name = screen.getByRole("cell", { name: user.name });
+    const email = screen.getByRole("cell", {
+      name: user.email,
+    });
+
+    expect(name).toBeInTheDocument();
+    expect(email).toBeInTheDocument();
+  }
+});
