@@ -9,7 +9,8 @@ export const UserList = ({ users }) => {
             <th>Email</th>
           </tr>
         </thead>
-        <tbody>
+
+        <tbody data-testid="users">
           {users.map((user) => (
             <tr key={user.email}>
               <td>{user.name}</td>

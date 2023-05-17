@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export const UserForm = ({ users, onUserAdd }) => {
+export const UserForm = ({ onUserAdd }) => {
   const nameRef = useRef();
   const emailRef = useRef();
 
@@ -23,10 +23,10 @@ export const UserForm = ({ users, onUserAdd }) => {
     <div onSubmit={addUser}>
       <h1>Add User</h1>
       <form>
-        <label>Name</label>
-        <input ref={nameRef} type="text" name="" id="" />
-        <label>Email</label>
-        <input ref={emailRef} type="email" name="" id="" />
+        <label htmlFor="name">Name</label>
+        <input ref={nameRef} type="text" id="name" />
+        <label htmlFor="email">Email</label>
+        <input ref={emailRef} type="email" id="email" />
         <button>Submit</button>
       </form>
     </div>
