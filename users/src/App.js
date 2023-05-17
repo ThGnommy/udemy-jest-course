@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import { AddUser } from "./components/AddUser";
+import { UserForm } from "./components/UserForm";
 import { UserList } from "./components/UserList";
 
 function App() {
   const [users, setUsers] = useState([]);
 
   return (
-    <div>
-      <AddUser setState={setUsers} />
+    <div className="App">
+      <UserForm setState={setUsers} />
       <UserList users={users} />
     </div>
   );

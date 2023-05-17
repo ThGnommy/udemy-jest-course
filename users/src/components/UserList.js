@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 export const UserList = ({ users }) => {
   return (
     <div>

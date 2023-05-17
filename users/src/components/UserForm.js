@@ -1,7 +1,6 @@
 import { useId, useRef } from "react";
 
-/* eslint-disable react/prop-types */
-export const AddUser = ({ setState }) => {
+export const UserForm = ({ setState }) => {
   const id = useId();
 
   const nameRef = useRef();
