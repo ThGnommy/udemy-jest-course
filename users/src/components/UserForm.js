@@ -20,9 +20,9 @@ export const UserForm = ({ onUserAdd }) => {
   };
 
   return (
-    <div onSubmit={addUser}>
+    <div>
       <h1>Add User</h1>
-      <form>
+      <form onSubmit={addUser}>
         <label htmlFor="name">Name</label>
         <input ref={nameRef} type="text" id="name" />
         <label htmlFor="email">Email</label>

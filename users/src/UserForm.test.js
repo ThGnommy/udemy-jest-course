@@ -17,7 +17,7 @@ test("it shows two inputs and a button", () => {
   expect(button).toBeInTheDocument();
 });
 
-test("it calls addUser when the form submitted", () => {
+test("it calls addUser when the form submitted", async () => {
   const mock = jest.fn();
 
   // try to render my component
@@ -35,25 +35,53 @@ test("it calls addUser when the form submitted", () => {
   });
 
   // simulate typing in a name
-  user.click(nameInput);
-  user.keyboard("jane");
+  await user.click(nameInput);
+  await user.keyboard("jane");
 
   // simulate typing in a email
-  user.click(emailInput);
-  user.keyboard("jane@email.com");
+  await user.click(emailInput);
+  await user.keyboard("jane@email.com");
 
   // find the button
   const button = screen.getByRole("button");
 
   // simulate button click
-  user.click(button);
+  await user.click(button);
 
   // assertion to make sure addUser gets called with email/name
-
   expect(mock).toHaveBeenCalled();
 
   expect(mock).toHaveBeenCalledWith({
     name: "jane",
     email: "jane@email.com",
   });
+});
+
+test("empties the two inputs if form is submitted", async () => {
+  render(<UserForm onUserAdd={() => {}} />);
+
+  const nameInput = screen.getByRole("textbox", {
+    name: /name/i,
+  });
+
+  const emailInput = screen.getByRole("textbox", {
+    name: /email/i,
+  });
+
+  // simulate typing in a name
+  await user.click(nameInput);
+  await user.keyboard("jane");
+
+  // simulate typing in a email
+  await user.click(emailInput);
+  await user.keyboard("jane@email.com");
+
+  // find the button
+  const button = screen.getByRole("button");
+
+  // simulate button click
+  await user.click(button);
+
+  expect(nameInput).toHaveValue("");
+  expect(emailInput).toHaveValue("");
 });
